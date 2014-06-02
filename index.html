@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<script src="flight.js">
+</script>
+<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div id="container">
+<div id="header"><img src="images/name.png"><br/><p>Going the distance for your flight</p></div>
+<div id="departure">
+  <input type="text" id="depart" class="input">
+  <div class="title"><h2>departure</h2></div>
+</div>
+<div id="arrival">
+  <input type="text" id="arrive" class="input">
+  <div class="title"><h2>arrival</h2></div>
+</div>
+<div id="distance"></div>
+<div id="submit">
+  <button id="go" onclick="airport_distances()">go</button>
+</div>
+<script>
+function airport_distances()
+{ 
+	var x, y, z, a;
+	
+	x = document.getElementById("arrive").value;
+	x = x.toUpperCase();
+	a = IntentMedia.Airports.airport_exists(x);
+	if (a == false)
+	{
+		z="airport does not exist";
+	}
+	else
+	{
+		y = document.getElementById("depart").value;
+		y = y.toUpperCase();
+		a = IntentMedia.Airports.airport_exists(y);
+		if (a == false)
+		{
+			z="airport does not exist";
+		}
+		else
+		{
+			z = IntentMedia.Distances.distance_between_airports(x, y);
+			if (z == 0)
+			{
+				z="Airports are same";
+			}
+			else
+			{
+				z = z + " miles";
+			}
+		}
+	}
+	document.getElementById("distance").innerHTML = z;
+}
+
+
+</script>
+</div>
+</body>
+</html>
